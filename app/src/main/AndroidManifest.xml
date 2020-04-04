@@ -3,8 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.meet">
 
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -13,25 +11,24 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-
-        <!--OPPO-->
+        <activity android:name=".test.TestActivity"></activity>
+        <!-- Bmob -->
+        <provider
+            android:name="cn.bmob.v3.util.BmobContentProvider"
+            android:authorities="com.example.meet.BmobContentProvider">
+        </provider>
+        <!-- OPPO -->
         <meta-data
             android:name="android.max_aspect"
             android:value="2.2" />
-
-        <!--小米适配-->
         <meta-data
             android:name="notch.config"
             android:value="portrait|landscape" />
-        <!--登录-->
-        <activity android:name=".ui.LoginActivity"></activity>
-        <!--引导-->
-        <activity android:name=".ui.IndexActivity" >
+        <activity android:name=".ui.LoginActivity"
+            android:theme="@style/AppThemeFull">
 
         </activity>
-        <!--启动-->
-        <activity
-            android:name=".ui.GuideActivity"
+        <activity android:name=".ui.IndexActivity"
             android:theme="@style/AppThemeFull">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -39,11 +36,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <!--主页-->
+        <activity
+            android:name=".ui.GuideActivity"
+            android:theme="@style/AppThemeFull">
+
+        </activity>
         <activity
             android:name=".MainActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" >
 
+        </activity>
     </application>
 
 </manifest>

@@ -1,31 +1,36 @@
 package com.example.meet;
 
-import android.content.res.AssetFileDescriptor;
-import android.os.Build;
 import android.os.Bundle;
 
-import androidx.annotation.RequiresApi;
 
 import com.example.framework.base.BaseUIActivity;
-import com.example.framework.manager.MediaPlayerManager;
+import com.example.framework.utils.LogUtils;
+
+import java.util.List;
 
 public class MainActivity extends BaseUIActivity {
 
-    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        requestPermiss();
 
+    }
 
-        final MediaPlayerManager mediaPlayerManager = new MediaPlayerManager();
-        mediaPlayerManager.setOnProgressListener(new MediaPlayerManager.OnMusicProgressListener() {
+    private void requestPermiss() {
+        //危险权限
+        request(new OnPermissionsResult() {
             @Override
-            public void onProgress(int progress, int pos) {
+            public void OnSuccess() {
 
             }
-        });
 
+            @Override
+            public void OnFail(List<String> noPermissions) {
+                LogUtils.i("noPermissions:" + noPermissions.toString());
+            }
+        });
     }
 }

@@ -1,6 +1,9 @@
 apply plugin: 'com.android.library'
 
 android {
+
+    useLibrary rootProject.ext.dependencies["httpclient"]
+
     compileSdkVersion rootProject.ext.android["compileSdkVersion"]
     buildToolsVersion rootProject.ext.android["buildToolsVersion"]
 
@@ -38,4 +41,13 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+
+    api rootProject.ext.dependencies["bmobsdk"]
+    api rootProject.ext.dependencies["rxjava2"]
+    api rootProject.ext.dependencies["rxandroid2"]
+    api rootProject.ext.dependencies["okio"]
+    api rootProject.ext.dependencies["gson"]
+    api rootProject.ext.dependencies["okhttp3"]
+
+
 }

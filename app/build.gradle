@@ -9,6 +9,8 @@ android {
         //禁用PNG压缩
         aaptOptions.cruncherEnabled = false
     }
+
+
     compileSdkVersion rootProject.ext.android["compileSdkVersion"]
     buildToolsVersion rootProject.ext.android["buildToolsVersion"]
     defaultConfig {
@@ -37,4 +39,6 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
     //添加framework依赖
     implementation project(path: ':framework')
+
+
 }

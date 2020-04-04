@@ -8,6 +8,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.text.TextUtils;
 
+import com.example.framework.bmob.BmobManager;
 import com.example.framework.entity.Constants;
 import com.example.framework.utils.SpUtils;
 import com.example.meet.MainActivity;
@@ -53,8 +54,13 @@ public class IndexActivity extends AppCompatActivity {
             //判断是否曾经登录过
             String token = SpUtils.getInstance().getString(Constants.SP_TOKEN, "");
             if(TextUtils.isEmpty(token)){
-                //跳转到登录页
-                intent.setClass(this, LoginActivity.class);
+                if(BmobManager.getInstance().isLogin()){
+                    //跳转到主页
+                    intent.setClass(this, MainActivity.class);
+                }else{
+                    //跳转到登录页
+                    intent.setClass(this, LoginActivity.class);
+                }
             }else{
                 //跳转到主页
                 intent.setClass(this, MainActivity.class);
