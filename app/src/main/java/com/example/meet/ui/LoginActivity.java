@@ -64,8 +64,6 @@ public class LoginActivity extends BaseUIActivity implements View.OnClickListene
         }
     });
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,8 +76,9 @@ public class LoginActivity extends BaseUIActivity implements View.OnClickListene
 
         initDialogView();
 
-        tv_test_login = findViewById(R.id.tv_test_login);
-        tv_test_login.setOnClickListener(this);
+
+//        tv_test_login = findViewById(R.id.tv_test_login);
+//        tv_test_login.setOnClickListener(this);
         et_phone = (EditText) findViewById(R.id.et_phone);
         et_code = (EditText) findViewById(R.id.et_code);
         btn_send_code = (Button) findViewById(R.id.btn_send_code);
@@ -113,7 +112,7 @@ public class LoginActivity extends BaseUIActivity implements View.OnClickListene
     public void onClick(View v) {
         switch(v.getId()){
             case R.id.btn_send_code:
-                DialogManager.getInstance().show(mCodeView);
+               DialogManager.getInstance().show(mCodeView);
                 break;
             case R.id.btn_login:
                 login();
@@ -140,7 +139,7 @@ public class LoginActivity extends BaseUIActivity implements View.OnClickListene
             return;
         }
         //显示LodingView
-        mLodingView.show("正在登录...");
+        mLodingView.show(getString(R.string.text_login_now_login_text));
         BmobManager.getInstance().signOrLoginByMobilePhone(phone, code, new LogInListener<IMUser>() {
             @Override
             public void done(IMUser imUser, BmobException e) {
@@ -151,8 +150,12 @@ public class LoginActivity extends BaseUIActivity implements View.OnClickListene
                     SpUtils.getInstance().putString(Constants.SP_PHONE, phone);
                     finish();
                 }else{
-                    Toast.makeText(LoginActivity.this, "ERROR" + e.toString(),
-                            Toast.LENGTH_SHORT).show();
+                    if(e.getErrorCode() == 207){
+                        Toast.makeText(LoginActivity.this, getString(R.string.text_login_code_error), Toast.LENGTH_SHORT).show();
+                    }else{
+                        Toast.makeText(LoginActivity.this, "ERROR" + e.toString(),
+                                Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
         });
@@ -174,11 +177,11 @@ public class LoginActivity extends BaseUIActivity implements View.OnClickListene
                 if(e == null){
                     btn_send_code.setEnabled(false);
                     mHandler.sendEmptyMessage(H_TIME);
-                    Toast.makeText(LoginActivity.this, "短信验证码发送成功",
+                    Toast.makeText(LoginActivity.this,  getString(R.string.text_user_resuest_succeed),
                             Toast.LENGTH_SHORT).show();
                 }else{
-                    LogUtils.e("SMS:" + e.toString());
-                    Toast.makeText(LoginActivity.this, "短信验证码发送失败",
+                    //LogUtils.e("SMS:" + e.toString());
+                    Toast.makeText(LoginActivity.this, getString(R.string.text_user_resuest_fail),
                             Toast.LENGTH_SHORT).show();
                 }
             }

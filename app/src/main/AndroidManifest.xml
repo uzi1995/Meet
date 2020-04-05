@@ -5,13 +5,16 @@
 
 
     <application
+        android:name=".base.BaseApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="遇见"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".test.TestActivity"></activity>
+        <activity android:name=".test.TestActivity">
+
+        </activity>
         <!-- Bmob -->
         <provider
             android:name="cn.bmob.v3.util.BmobContentProvider"
@@ -25,7 +28,7 @@
             android:name="notch.config"
             android:value="portrait|landscape" />
         <activity android:name=".ui.LoginActivity"
-            android:theme="@style/AppThemeFull">
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
 
         </activity>
         <activity android:name=".ui.IndexActivity"
@@ -35,6 +38,7 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
         <activity
             android:name=".ui.GuideActivity"
